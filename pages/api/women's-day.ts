@@ -2,5 +2,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.redirect(308, "https://youtu.be/d89vnfg_3JE?utm=cws");
+  res.redirect(308, `https://youtu.be/rp9gLjWR9FI?utm=cws&__d=${Date.now()}`);
 }
