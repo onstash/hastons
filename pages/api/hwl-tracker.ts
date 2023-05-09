@@ -27,19 +27,31 @@ function generateTrackerMessage(name: string) {
   return `Tracker for ${name}
 Date: ${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}
 
-01. Walking 30 minutes (or) yoga: 
-02. Meditation: 
-03. Breathing exercise/prAnAyAma: 
-04. 3 things I am grateful about:
-05. Reading book 15-30+ minutes:
-06. Head massage:
-07. Sleep time:
-08. Wake up time:
-09. How was your sleep?: 
-10. Any sleep disturbance?: 
-11. Are you feeling happy?: 
-12. Any other thing on your mind?:
-13. How else can I help you, ${name.split(" ")[0]}?: `
+- Walking 30 minutes (or) yoga: 
+
+- Meditation: 
+
+- Breathing exercise/prAnAyAma: 
+
+- 3 things I am grateful about:
+
+- Reading book 15-30+ minutes: [What book, what did you like, etc]
+
+- Head massage:
+
+- Sleep time:
+
+- Wake up time:
+
+- Any sleep disturbance?: 
+
+- How was your sleep?: 
+
+- Are you feeling happy?: 
+
+- Any other thing on your mind?:
+
+- How else can I help you, ${name.split(" ")[0]}?: `
     .split("\n")
     .join("\n");
 }
