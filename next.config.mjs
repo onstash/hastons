@@ -8,7 +8,7 @@ const nextConfig = {
       // Basic redirect
       {
         source: '/',
-        destination: 'https://beacons.ai/coach.with.santosh',
+        destination: '/blog',
         permanent: true,
       },
       // // Wildcard path matching
