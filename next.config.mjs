@@ -8,7 +8,12 @@ const nextConfig = {
       // Basic redirect
       {
         source: '/',
-        destination: '/blog',
+        destination: '/blog/welcome',
+        permanent: true,
+      },
+      {
+        source: '/blog',
+        destination: '/blog/welcome',
         permanent: true,
       },
       // // Wildcard path matching
