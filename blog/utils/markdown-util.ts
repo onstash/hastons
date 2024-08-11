@@ -80,7 +80,7 @@ export async function getPreviousAndNextBlogPosts(currentPageSlug: BlogPostSlug)
 }> {
   console.log('@@ getPreviousAndNextBlogPosts()', {currentPageSlug});
   const currentPageSlugWithSlashPrefix = `/${currentPageSlug}`;
-  let allMarkdownFilesWithContent = [];
+  let allMarkdownFilesWithContent: Array<{slug: string; title: string; publishedAt: Date}> = [];
   for (let _node of allMarkdownFiles) {
     const { slug } = _node;
     const _content = await getMDXFileContent(slug);
