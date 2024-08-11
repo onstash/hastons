@@ -14,13 +14,13 @@ export const BlogPostFooterNavigation = ({ previousPost, nextPost }: FooterNavig
       <nav style={{ display: 'flex', justifyContent: 'space-between' }}>
         {previousPost ? (
           <Link href={`/blog/${previousPost.slug}`}>
-            <p>&larr; Previous: {previousPost.title}</p>
+            <span style={{fontSize: 12}}>&larr; Previous: {previousPost.title}</span>
           </Link>
         ) : <span />}
         
         {nextPost ? (
           <Link href={`/blog/${nextPost.slug}`}>
-            <p>Next: {nextPost.title} &rarr;</p>
+            <span style={{fontSize: 12}}>Next: {nextPost.title} &rarr;</span>
           </Link>
         ) : <span />}
       </nav>

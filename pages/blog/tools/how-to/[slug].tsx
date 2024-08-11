@@ -73,7 +73,6 @@ const Post = ({
     <div>
       <BlogPostSEOTags
         title={frontmatter.title}
-        description={frontmatter.description || frontmatter.title}
         url={`https://coachwithsantosh.vercel.app/blog/${slug}`}
         datePublished={frontmatter.publishedAt}
       />

@@ -2,14 +2,14 @@ import Head from "next/head";
 
 export const BlogPostSEOTags = ({
   title,
-  description,
+  description = "Santosh Venkatraman's Blog",
   url,
   datePublished,
   authorName,
   image = "https://coachwithsantosh.vercel.app/favicon.ico",
 }: {
   title: string;
-  description: string;
+  description?: string;
   url: string;
   datePublished: string;
   authorName?: "Santosh Venkatraman"
