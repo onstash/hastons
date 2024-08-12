@@ -87,7 +87,7 @@ export async function getPreviousAndNextBlogPosts(currentPageSlug: BlogPostSlug)
     allMarkdownFilesWithContent.push({ slug, title: _content.frontmatter.title, publishedAt: new Date(_content.frontmatter.publishedAt) })
   }
   console.log('@@ allMarkdownFilesWithContent (before)', allMarkdownFilesWithContent);
-  allMarkdownFilesWithContent.sort((a, b) => a.publishedAt < b.publishedAt ? -1 : 1);
+  allMarkdownFilesWithContent.sort((a, b) => a.publishedAt > b.publishedAt ? -1 : 1);
   console.log('@@ allMarkdownFilesWithContent (after)', allMarkdownFilesWithContent);
 
   let previousBlogPostSlug: BlogPostLinkWithTitleAndSlug["slug"] | null = null;
@@ -112,7 +112,7 @@ export async function getPreviousAndNextBlogPosts(currentPageSlug: BlogPostSlug)
 
 
   return {
-    previousBlogPost: previousBlogPostSlug !== null && previousBlogPostTitle !== null ? { title: previousBlogPostTitle, slug: previousBlogPostSlug } : null,
-    nextBlogPost: nextBlogPostSlug !== null && nextBlogPostTitle !== null ? { title: nextBlogPostTitle, slug: nextBlogPostSlug } : null,
+    nextBlogPost: previousBlogPostSlug !== null && previousBlogPostTitle !== null ? { title: previousBlogPostTitle, slug: previousBlogPostSlug } : null,
+    previousBlogPost: nextBlogPostSlug !== null && nextBlogPostTitle !== null ? { title: nextBlogPostTitle, slug: nextBlogPostSlug } : null,
   }
 }
