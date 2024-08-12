@@ -112,7 +112,7 @@ export async function getPreviousAndNextBlogPosts(currentPageSlug: BlogPostSlug)
 
 
   return {
-    previousBlogPost: previousBlogPostSlug !== null && previousBlogPostTitle !== null ? { title: previousBlogPostTitle, slug: previousBlogPostSlug } : null,
-    nextBlogPost: nextBlogPostSlug !== null && nextBlogPostTitle !== null ? { title: nextBlogPostTitle, slug: nextBlogPostSlug } : null,
+    nextBlogPost: previousBlogPostSlug !== null && previousBlogPostTitle !== null ? { title: previousBlogPostTitle, slug: previousBlogPostSlug } : null,
+    previousBlogPost: nextBlogPostSlug !== null && nextBlogPostTitle !== null ? { title: nextBlogPostTitle, slug: nextBlogPostSlug } : null,
   }
 }
