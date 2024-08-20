@@ -15,7 +15,7 @@ interface FooterNavigationProps {
 
 function getJustifyContentStyle(previousPost: FooterNavigationProps["previousPost"], nextPost: FooterNavigationProps["nextPost"]): Property.JustifyContent {
   if (previousPost && nextPost) {
-    return "space-around";
+    return "space-between";
   }
   if (previousPost) {
     return "flex-start";
