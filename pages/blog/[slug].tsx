@@ -1,14 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-
-import MDXLayout from "@/blog/components/layout";
-import { BlogPostHeaderNavigation } from "@/blog/components/HeaderNavigation";
-import {
-  BlogPostFooterNavigation,
-  BlogPostLinkWithTitleAndSlug,
-} from "@/blog/components/FooterNavigation";
-import { BlogPostSEOTags } from "@/blog/components/SEO/BlogPostSEOTags";
+import { BlogPost } from '@/blog/components/BlogPost';
 
 import {
   getAllMDXFilePaths,
@@ -52,40 +44,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-const Post = ({
-  source,
-  frontmatter,
-  slug,
-  footer,
-}: {
-  source: MDXRemoteSerializeResult<
-    Record<string, unknown>,
-    Record<string, unknown>
-  >;
-  frontmatter: Record<string, any>;
-  slug: string;
-  footer: {
-    previousBlogPost: BlogPostLinkWithTitleAndSlug;
-    nextBlogPost: BlogPostLinkWithTitleAndSlug;
-  };
-}) => {
-  return (
-    <div>
-      <BlogPostSEOTags
-        title={frontmatter.title}
-        url={`https://coachwithsantosh.vercel.app/blog/${slug}`}
-        datePublished={frontmatter.publishedAt}
-      />
-      <MDXLayout>
-        <BlogPostHeaderNavigation />
-        <MDXRemote {...source} />
-        <BlogPostFooterNavigation
-          previousPost={footer.previousBlogPost}
-          nextPost={footer.nextBlogPost}
-        />
-      </MDXLayout>
-    </div>
-  );
-};
-
-export default Post;
+export default BlogPost;

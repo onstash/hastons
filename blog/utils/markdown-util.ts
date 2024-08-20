@@ -80,11 +80,11 @@ export async function getPreviousAndNextBlogPosts(currentPageSlug: BlogPostSlug)
 }> {
   console.log('@@ getPreviousAndNextBlogPosts()', {currentPageSlug});
   const currentPageSlugWithSlashPrefix = `/${currentPageSlug}`;
-  let allMarkdownFilesWithContent: Array<{slug: string; title: string; publishedAt: Date}> = [];
+  let allMarkdownFilesWithContent: Array<{slug: string; shortTitle: string; publishedAt: Date}> = [];
   for (let _node of allMarkdownFiles) {
     const { slug } = _node;
     const _content = await getMDXFileContent(slug);
-    allMarkdownFilesWithContent.push({ slug, title: _content.frontmatter.title, publishedAt: new Date(_content.frontmatter.publishedAt) })
+    allMarkdownFilesWithContent.push({ slug, shortTitle: _content.frontmatter.shortTitle, publishedAt: new Date(_content.frontmatter.publishedAt) })
   }
   console.log('@@ allMarkdownFilesWithContent (before)', allMarkdownFilesWithContent);
   allMarkdownFilesWithContent.sort((a, b) => a.publishedAt > b.publishedAt ? -1 : 1);
@@ -101,11 +101,11 @@ export async function getPreviousAndNextBlogPosts(currentPageSlug: BlogPostSlug)
     if (slug === currentPageSlugWithSlashPrefix) {
       if (index - 1 >= 0) {
         previousBlogPostSlug = allMarkdownFilesWithContent[index - 1].slug;
-        previousBlogPostTitle = allMarkdownFilesWithContent[index - 1].title;
+        previousBlogPostTitle = allMarkdownFilesWithContent[index - 1].shortTitle;
       }
       if (index + 1 < allMarkdownFilesCount) {
         nextBlogPostSlug = allMarkdownFilesWithContent[index + 1].slug;
-        nextBlogPostTitle = allMarkdownFilesWithContent[index + 1].title;
+        nextBlogPostTitle = allMarkdownFilesWithContent[index + 1].shortTitle;
       }
     }
   });
