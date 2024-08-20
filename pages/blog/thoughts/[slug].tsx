@@ -8,7 +8,7 @@ import {
   getPreviousAndNextBlogPosts,
 } from "@/blog/utils/markdown-util"; // Adjust path as needed
 
-const _dir = "tools/how-to";
+const _dir = "thoughts";
 const staticPaths = getAllMDXFilePaths(_dir);
 
 export const getStaticPaths: GetStaticPaths = async () => {

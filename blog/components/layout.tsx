@@ -7,6 +7,8 @@ const pageStyle = {
   marginLeft: "auto",
   marginRight: "auto",
   backgroundColor: "#FFFFFF",
+  paddingLeft: '1rem',
+  paddingRight: '1rem',
   ...inter.style,
 };
 
