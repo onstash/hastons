@@ -80,14 +80,16 @@ export async function getPreviousAndNextBlogPosts(currentPageSlug: BlogPostSlug)
 }> {
   console.log('@@ getPreviousAndNextBlogPosts()', {currentPageSlug});
   const currentPageSlugWithSlashPrefix = `/${currentPageSlug}`;
-  let allMarkdownFilesWithContent: Array<{slug: string; shortTitle: string; publishedAt: Date}> = [];
+  let allMarkdownFilesWithContent: Array<{slug: string; shortTitle: string; publishedAt: Date, updatedAt?: Date}> = [];
   for (let _node of allMarkdownFiles) {
     const { slug } = _node;
     const _content = await getMDXFileContent(slug);
     allMarkdownFilesWithContent.push({ slug, shortTitle: _content.frontmatter.shortTitle, publishedAt: new Date(_content.frontmatter.publishedAt) })
   }
   console.log('@@ allMarkdownFilesWithContent (before)', allMarkdownFilesWithContent);
-  allMarkdownFilesWithContent.sort((a, b) => a.publishedAt > b.publishedAt ? -1 : 1);
+  allMarkdownFilesWithContent.sort((a, b) => {
+    return (a.updatedAt ?  a.updatedAt: a.publishedAt) > (b.updatedAt ? b.updatedAt : b.publishedAt) ? -1 : 1;
+  });
   console.log('@@ allMarkdownFilesWithContent (after)', allMarkdownFilesWithContent);
 
   let previousBlogPostSlug: BlogPostLinkWithTitleAndSlug["slug"] | null = null;
