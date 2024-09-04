@@ -33,7 +33,8 @@ export const BlogPost = ({
       <MDXLayout>
         <BlogPostHeaderNavigation />
         <h1>{frontmatter.title}</h1>
-        <h4>{formatHumanReadableDate(new Date(frontmatter.publishedAt))}</h4>
+        <h4>Published: {formatHumanReadableDate(new Date(frontmatter.publishedAt))}</h4>
+        {frontmatter.updatedAt ? <h4>Last updated: {formatHumanReadableDate(new Date(frontmatter.updatedAt))}</h4> : null}
         <MDXRemote {...source} />
         <BlogPostFooterNavigation
           previousPost={footer.previousBlogPost}
