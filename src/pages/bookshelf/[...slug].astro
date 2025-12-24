@@ -18,7 +18,7 @@ const { Content } = await summary.render();
 
 <Layout
   title={summary.data.title}
-  description={summary.data.description}
+  description={summary.data.description ?? ""}
   image={summary.data.image}
 >
   <main>
