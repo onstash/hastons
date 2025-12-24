@@ -6,7 +6,7 @@ slug: "take-it-personally"
 category: "personal-growth"
 ---
 
-Yes, the title is clear nod to [Michael Jordan's "And I Took That Personally" meme from Know Your Meme](https://knowyourmeme.com/memes/michael-jordans-and-i-took-that-personally).
+Yes, the title is a clear nod to [Michael Jordan's "And I Took That Personally" meme from Know Your Meme](https://knowyourmeme.com/memes/michael-jordans-and-i-took-that-personally).
 
 When it comes to self improvement, the not-so-obvious part is the self in self-improvement.
 
@@ -32,7 +32,7 @@ My reading style many times depend on my dopamine levels and my emotions.
 
 In this system, I became comfortable with marking important aspects in the book with the help of a pen and colourful post it tags.
 
-_How I use post tags in my books_
+![How I use post tags in my books](https://shtosan.wordpress.com/wp-content/uploads/2024/12/img_7603.jpg)
 
 ## Measure, then Improve
 
