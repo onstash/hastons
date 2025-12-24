@@ -1,38 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Miniblog
+
+**Miniblog** is an opinionated and extremely minimal blogging template built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/), whose design is heavily inspired by [jrmyphlmn.com](https://jrmyphlmn.com/). Incredibly easy to use and customize, you can use **Miniblog** as is, or add as much as you want to it.
+
+- Blog post authoring using [Markdown](https://www.markdownguide.org/) and [MDX](https://mdxjs.com/) for component-style content
+- Code block syntax highlighting with [Shiki](https://github.com/shikijs/shiki)
+- [RSS](https://en.wikipedia.org/wiki/RSS) feed and sitemap generation
+- SEO optimization, with customizable OpenGraph image support
+- Code formatting with [Prettier](https://prettier.io/)
+- Accessible view transitions
+- Dark mode
 
 ## Getting Started
 
-First, run the development server:
+1. Click "Use this template", the big green button on the top right, to create a new repository with this template.
+
+2. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+git clone https://github.com/[YOUR_USERNAME]/[YOUR_REPO_NAME].git
+cd [YOUR_REPO_NAME]
+```
+
+3. Install dependencies:
+
+```bash
+pnpm install
+```
+
+4. Start the development server:
+
+```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Optionally, format your code after making changes:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm format
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Customization
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+**Miniblog** purposely keeps itself minimal, relying on no other web framework than Astro, and keeping styling simple through Tailwind and traditional CSS.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Site Configuration
 
-## Learn More
+Edit the `src/consts.ts` file to update your information and site's metadata:
 
-To learn more about Next.js, take a look at the following resources:
+```ts
+export const SITE_URL = "https://miniblog.nicholasly.com";
+export const SITE_TITLE = "Miniblog";
+export const SITE_DESCRIPTION = "Welcome to my website!";
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+export const EMAIL = "hello@nicholasly.com";
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Blog Posts
 
-## Deploy on Vercel
+Add new blog posts as Markdown or MDX files in the `src/content/posts/` directory. Use the following frontmatter structure:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```yml
+---
+title: "Lorem Ipsum"
+description: "Lorem ipsum dolor sit amet."
+date: "Nov 06 2024"
+---
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Markdown Styling
+
+All Markdown-specific CSS styling is customizable in `src/styles/global.css`:
+
+```css
+@layer components {
+  article {
+    /* ... */
+  }
+}
+```
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
