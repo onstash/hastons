@@ -1,8 +1,8 @@
 ---
-title: "This video gave me hope about maintaining & upgrading React projects"
+title: "Maintaining & upgrading JS/TS projects"
 publishedAt: "2024-12-18"
-description: "If you are a developer interested in frontend (or) maintaining & upgrading React projects without losing your sanity, read this!"
-slug: "this-video-gave-me-hope-about-maintaining-upgrading-react-projects"
+description: "If you are a developer interested in frontend (or) maintaining & upgrading JS/TS projects without losing your sanity, read this!"
+slug: "maintaining-upgrading-react-projects"
 category: "tech"
 ---
 
