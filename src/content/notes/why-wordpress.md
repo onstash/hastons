@@ -1,8 +1,8 @@
 ---
-title: "Why I chose WordPress over other blogging tools?"
+title: "Why WordPress?"
 publishedAt: "2024-12-15"
 description: "A journey through failed blogging attempts and lessons learned about writing habits"
-slug: "why-i-chose-wordpress-over-other-blogging-tools"
+slug: "why-wordpress"
 category: "personal-growth"
 ---
 
