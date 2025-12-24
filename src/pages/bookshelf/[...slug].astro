@@ -1,0 +1,35 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { formatDate } from "../../lib/utils";
+
+export async function getStaticPaths() {
+  const summaries = await getCollection("bookshelf");
+  return summaries.map((summary) => ({
+    params: { slug: summary.slug },
+    props: summary,
+  }));
+}
+type Props = CollectionEntry<"bookshelf">;
+
+const summary = Astro.props;
+const { Content } = await summary.render();
+---
+
+<Layout
+  title={summary.data.title}
+  description={summary.data.description}
+  image={summary.data.image}
+>
+  <main>
+    <h1 class="mb-5 text-xl font-medium">
+      {summary.data.title}
+    </h1>
+    <p class="mb-1 font-medium text-zinc-500">
+      {formatDate(summary.data.publishedAt)}
+    </p>
+    <article>
+      <Content />
+    </article>
+  </main>
+</Layout>

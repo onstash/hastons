@@ -10,4 +10,15 @@ const posts = defineCollection({
   }),
 });
 
-export const collections = { posts };
+const bookshelf = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    publishedAt: z.coerce.date(),
+    updatedAt: z.coerce.date(),
+    image: z.string().default("/static/blog-placeholder.png"),
+  }),
+});
+
+export const collections = { posts, bookshelf };
