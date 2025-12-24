@@ -1,6 +1,6 @@
 ---
-title: 'Rainbow display-picture "trend"'
-description: 'Commentary on the rainbow display-picture "trend"'
+title: "Rainbow display-picture 'trend'"
+description: "Commentary on the rainbow display-picture 'trend'"
 slug: "rainbow-display-picture-trend"
 publishedAt: 2015-06-30
 ---
