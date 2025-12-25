@@ -17,6 +17,16 @@ function cleanPathname(pathname: string) {
   return cleaned.replaceAll("/", "__");
 }
 
+// Extract UTM parameters from URL
+function getUtmParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    utm_source: params.get("utm_source") ?? null,
+    utm_medium: params.get("utm_medium") ?? null,
+    utm_campaign: params.get("utm_campaign") ?? null,
+  };
+}
+
 function initTracking() {
   const distinctId = localStorage.getItem("mp_id") || crypto.randomUUID();
   localStorage.setItem("mp_id", distinctId);
@@ -33,6 +43,7 @@ function initTracking() {
         page: window.location.pathname,
         title: document.title,
         app_version: appVersion,
+        ...getUtmParams(),
       },
     }),
   }).catch((err) => console.error("Failed to track page load:", err));
@@ -51,6 +62,7 @@ function initTracking() {
             duration_seconds: timeSpent,
             timing_api: usePerformanceAPI ? "performance" : "date",
             app_version: appVersion,
+            ...getUtmParams(),
           },
         }),
       );
