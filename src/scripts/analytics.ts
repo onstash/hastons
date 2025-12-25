@@ -13,8 +13,9 @@ const usePerformanceAPI =
   typeof performance !== "undefined" && !!performance.now;
 
 function cleanPathname(pathname: string) {
-  let cleaned = pathname.startsWith("/") ? pathname.split("/")[0] : pathname;
-  return cleaned.replaceAll("/", "__");
+  let pathnameParts = pathname.split("/");
+  let cleaned = pathnameParts.join("__").split("__")[0];
+  return cleaned;
 }
 
 // Extract UTM parameters from URL
@@ -52,9 +53,10 @@ function initTracking() {
   const handleVisibilityChange = () => {
     if (document.visibilityState === "hidden") {
       const timeSpent = Math.round((getTime() - pageLoadTime) / 1000);
-      navigator.sendBeacon(
-        "/api/track",
-        JSON.stringify({
+      fetch("/api/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           event: `v${appVersion}_time_spent_${cleanPathname(window.location.pathname)}`,
           distinctId,
           properties: {
@@ -65,7 +67,7 @@ function initTracking() {
             ...getUtmParams(),
           },
         }),
-      );
+      }).catch((err) => console.error("Failed to track time spent:", err));
     }
   };
 
