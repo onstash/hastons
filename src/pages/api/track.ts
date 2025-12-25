@@ -121,13 +121,7 @@ export const POST: APIRoute = async ({ request }) => {
     // Extract headers from the browser request
     const userAgent = request.headers.get("user-agent");
     const referer = request.headers.get("referer");
-    // Split referer into chunks of max 205 characters for Mixpanel property limits
-    const refererParts: string[] = [];
-    if (referer) {
-      for (let i = 0; i < referer.length; i += 205) {
-        refererParts.push(referer.slice(i, i + 205));
-      }
-    }
+
     const acceptLanguage = request.headers.get("accept-language");
     const ip =
       request.headers.get("x-forwarded-for") ||
@@ -145,7 +139,6 @@ export const POST: APIRoute = async ({ request }) => {
 
       // Referral tracking
       $referrer: referer,
-      refererParts,
 
       // Geo/Locale
       $locale: acceptLanguage?.split(",")[0],
