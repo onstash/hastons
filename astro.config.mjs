@@ -4,6 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel";
+import { visualizer } from "rollup-plugin-visualizer";
 
 import { SITE_URL } from "./src/consts";
 
@@ -24,4 +25,12 @@ export default defineConfig({
       enabled: true,
     },
   }),
+  vite: {
+    plugins: [
+      visualizer({
+        emitFile: true,
+        filename: "stats.html",
+      }),
+    ],
+  },
 });
