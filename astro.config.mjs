@@ -26,6 +26,9 @@ export default defineConfig({
     },
   }),
   vite: {
+    define: {
+      __APP_VERSION__: JSON.stringify((await import("./package.json")).version),
+    },
     plugins: [
       visualizer({
         emitFile: true,
