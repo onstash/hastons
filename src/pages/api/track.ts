@@ -8,6 +8,21 @@ const mixpanel = Mixpanel.init(import.meta.env.MIXPANEL_TOKEN, {
   verbose: true,
 });
 
+// CORS headers for cross-origin requests
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+// Handle preflight OPTIONS request
+export const OPTIONS: APIRoute = async () => {
+  return new Response(null, {
+    status: 204,
+    headers: corsHeaders,
+  });
+};
+
 // ═══════════════════════════════════════════════════════════════════════════
 // USER-AGENT PARSING UTILITIES
 // ═══════════════════════════════════════════════════════════════════════════
@@ -114,7 +129,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (!event) {
       return new Response(JSON.stringify({ error: "Missing event name" }), {
         status: 400,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
@@ -152,7 +167,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (origin?.includes?.("localhost")) {
       return new Response(JSON.stringify({ success: true, dev: true }), {
         status: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
@@ -162,13 +177,13 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   } catch (error) {
     console.error("Mixpanel tracking error:", error);
     return new Response(JSON.stringify({ error: "Failed to track event" }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 };

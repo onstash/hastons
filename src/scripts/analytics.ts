@@ -13,8 +13,9 @@ const usePerformanceAPI =
   typeof performance !== "undefined" && !!performance.now;
 
 function cleanPathname(pathname: string) {
-  let cleaned = pathname.startsWith("/") ? pathname.split("/")[0] : pathname;
-  return cleaned.replaceAll("/", "__");
+  let pathnameParts = pathname.split("/");
+  let cleaned = pathnameParts.join("__").split("__")[0];
+  return cleaned;
 }
 
 // Extract UTM parameters from URL
