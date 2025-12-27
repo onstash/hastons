@@ -1,5 +1,11 @@
 # hastons
 
+## 1.2.0
+
+### Minor Changes
+
+- notes/comparison-and-daughters
+
 ## 1.1.2
 
 ### Patch Changes
