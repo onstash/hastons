@@ -1,6 +1,6 @@
 ---
 title: "Comparisons and Daughters"
-pubDate: "2025-12-27"
+publishedAt: "2025-12-27"
 description: "And why this is ruining our lives"
 slug: "comparisons-and-daughters"
 category: "life"
