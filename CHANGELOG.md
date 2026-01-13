@@ -1,5 +1,11 @@
 # hastons
 
+## 1.3.0
+
+### Minor Changes
+
+- feat(content): add logger utility note
+
 ## 1.2.0
 
 ### Minor Changes
