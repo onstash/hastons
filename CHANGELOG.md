@@ -1,5 +1,11 @@
 # hastons
 
+## 1.4.0
+
+### Minor Changes
+
+- feat: look again book - intro chapter
+
 ## 1.3.0
 
 ### Minor Changes
