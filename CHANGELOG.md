@@ -1,5 +1,11 @@
 # hastons
 
+## 1.5.0
+
+### Minor Changes
+
+- 0207e76: feat: notes/prompting-strategy-the-gap-finder
+
 ## 1.4.0
 
 ### Minor Changes
