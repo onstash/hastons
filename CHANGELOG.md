@@ -1,5 +1,11 @@
 # hastons
 
+## 1.5.1
+
+### Patch Changes
+
+- da6593e: feat: changesets should commit
+
 ## 1.5.0
 
 ### Minor Changes
