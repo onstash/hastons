@@ -100,25 +100,29 @@ Did the costs increase? Yes, definitely. Paying for API calls, subscriptions, et
 
 Did the Outputs for the business (profits) increase in the same proportion? Not likely.
 
+Which means, business is stagnating or worse declining, while Input costs (inclusive of AI tools) are increasing.
+
 Did companies over-hire during the ZIRP + pandemic era? Yes.
 
 Did they have "organizational debt" of poor and lower end of medium performers? Yes.
 
-To continue investment into AI + productivity gains for most employees meant the org size would have to reduce. From my understanding, this trend would continue.
+To continue investment into AI + productivity gains for most employees means that the org has to cut costs. Either have a financial ceiling for AI costs or reduce headcount. Which is what most orgs are doing now.
 
-Unless and until
+This would continue to happen until
 
-## We Need To Seriously Learn\* To Use AI Correctly
+## We Seriously Learn\* To Use AI Correctly
 
 The tokens need to be effectively used to create business value.
 
 Not useless BS features and products, which should ideally not be prioritized in the first place.
 
-## Cost of Tokens Come Down
+## Cost of Tokens Actually Come Down
 
 These AI companies need to become profitable so that the costs of tokens actually come down.
 
-## Don't Spray And Pray
+Else this would continue eat the profits of the orgs. And orgs would stop / drastically reduce AI and then boom the AI bubble bursts (highly unlikely but possible)
+
+## Rethink "Spray And Pray" Strategy
 
 Be very clear about where to deploy AI and where to not deploy AI.
 
