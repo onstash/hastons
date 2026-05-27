@@ -1,5 +1,5 @@
 ---
-title: "The AI Hallucination Problem"
+title: "The AI Hallucination Problem - updated"
 publishedAt: "2026-05-27"
 description: "AI, hallucination, psychosis & its impact"
 slug: "the-ai-hallucination-problem-v2"
