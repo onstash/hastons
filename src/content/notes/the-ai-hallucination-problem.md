@@ -2,144 +2,130 @@
 title: "The AI Hallucination Problem"
 publishedAt: "2026-05-07"
 description: "AI, hallucination, psychosis & its impact"
-slug: "the-ai-hallucination-problem"
+slug: "the-current-reaility-may-2026"
 category: "ai"
 ---
 
-# Hello there
+## Historical Context
 
-AI / LLMs have leapfrogged in the last 3.5 years. Truly grateful to go from skepticism to optimism to now informed optimism-pessimism combo.
+After November 2022, "ChatGPT" became a verb in both personal and professional spaces.
 
-What I am going to be talking about: the hallucinations and psychosis in the human side when using and adopting AI in orgs at scale.
+It helped people become more productive while also making them less afraid to ask "dumb" and "obvious" questions.
 
-# Engineering is a Tool for Business
+Leaders understood the potential upside of this for their teams.
 
-Engineering is designed to solve problems. Business problems. Yes you do solve engineering problems in the process, but that's not the main goal.
+So they initially optimized for curiosity. But most of the workforce was still skeptical because AI was new.
 
-Either most haven't understood it or have forgotten it or have been ignorant of it.
+## The Curiosity Era
 
-But this is the reality.
+To solve this problem, they started gamifying the process of AI curiosity, adoption & experimentation.
 
-In the Zero Interest Rate Policy (ZIRP) era, engineering was used for growth. Not just growth but growth for growth's sake. Growth at any cost. I have worked in an early stage startup, so I have some idea about this.
+The new expected behavior was now tied to recognition and rewards.
 
-That's why the whole "frontend" vs "backend" vs "fullstack" debate is pointless. It's marketing. Nothing else. You build what is required.
+## The Experimentation Era
 
-# Covid-19 Era Hyperinflation
+Once teams were incentivized to experiment aggressively with AI in their respective business functions, they eventually started building around it.
 
-In the same ZIRP era during the Covid-19 pandemic, employees had a temporary upper-hand in switching jobs and raking in the moolahs. Especially true in tech.
+Will the approach be uniform? No.
+Will it be the most optimal solution? Unlikely.
+Will the focus be about keeping costs low or bearable? Unlikely.
 
-And the ZIRP era ended abruptly in 2022 when US decided to increase interest rates to combat the hyperinflation it helped create.
+## The Adoption Era
 
-So work-life balance, "day in the lift of <Org> employee" YouTube videos largely started to slowly disappear.
+Individually, AI clearly improved productivity.
 
-# AI / LLM Era from Nov 2022
+Tasks that previously took X time now took a fraction of X.
 
-ChatGPT was released in November 2022. That ushered in the AI / LLM era.
+So the collective theory was: if aligned teams are given AI tools, collective productivity should increase as well.
 
-"ChatGPT" became a verb in itself.
+To track this, metrics have to be established.
 
-This eventually led to the aspect of AI-assisted coding.
+Why? Because companies are investing in $$$ and they want to track & measure if the continued investment is leading to the results that they're looking for.
 
-# Companies Adopting AI
+## The Measurement Era
 
-Companies saw this as a wave that they didn't want to miss out and lag behind from.
+Once AI usage became measurable, organizations naturally started optimizing for the measurable layer itself.
 
-So they started investing in AI tools.
+Engineering Managers, Directors, Vice Presidents, CTOs, etc, started with questions
+- How much is the productivity increase?
+- How much is the velocity increase?
+- Why / why not?
 
-Microsoft Office 365 + Copilot.
+This is where Goodhart’s Law quietly started appearing inside organizations.
 
-Google Workspace + Gemini.
+## Outputs Are Easy To Measure
 
-GitHub Copilot.
+Organizations can easily measure AI-assisted activity and outputs.
+- Number of PRs merged
+- Number of reports generated
+- Number of AI prompts used
+- Tokens consumed
+- AI adoption %
+- Number of slides created
+- Tickets closed
+- Lines of code generated
 
-Access to models hosted in Azure, AWS, etc.
+These metrics are immediate, visible, comparable, and dashboard-friendly.
 
-And orgs created rudimentary metrics to track adoption:
+## Outputs Usually Arrive Before Outcomes
 
-1. Are you using & how much?
-2. Leaderboards
-3. Recognition of "power users"
+Outputs happen immediately.
+Outcomes lag behind.
 
-# Experimental Products & Features
+AI-generated code can increase velocity today.
+Technical debt may appear months later.
 
-LLMs was sprinkled everywhere. This was a gigantic experiment. What used to be ignored or de-prioritized earlier due to human capital or cost issues, were now being thrown around as experimental products / features.
+AI-generated reports can increase throughput today.
+Decision quality may remain unchanged later.
 
-Running OpenAI or Anthropic or Google's models are not cheap but they decided to offer heavy discounts for adoption.
+## More Outputs Doesn't Necessarily Lead to More Outcomes
 
-The standard VC playbook: hook, line, and sinker. Create the dependency first.
+Organizations increasingly started assuming that more measurable outputs would naturally translate into better business outcomes.
 
-Companies providing access to models (OpenAI, Anthropic, etc) wanted more adoption. Companies who would be consumers of these models wanted to experiment and see if they could gain an edge.
+## Outcomes Are Much Harder To Measure
 
-# AI-Assisted Coding from 2024 to Now
+Outputs are immediate, visible, and attributable.
 
-Microsoft had the first movers advantage with their investment in OpenAI and subsequent launch of GitHub Copilot.
+Outcomes are delayed, multi-causal, and systemic.
 
-Unfortunately the quality was "fine" and eventually they lost the plot. GitHub's Copilot was nerfed due to limitations of accessign only GPT 4.X and due to beauraucratic nonsense, as per internal sources.
+- Did revenue increase sustainably?
+- Did profit margins improve?
+- Did customers become happier?
+- Did engineering quality improve?
+- Did maintenance burden reduce?
+- Did long-term velocity improve?
+- Did decision quality improve?
 
-Then came in Cursor, Claude Code, Antigravity, Codex, etc.
+## The Compute Crunch
 
-They were much much better than GitHub Copilot. They ushered in the era of "Agentic AI coding" and "harnesses for AI", from my understanding.
+AI model providers have been subsidizing heavily until recently because they needed AI adoption & Enterprise customers.
 
-# What AI-Assisted Coding Tools Enabled For Orgs?
+OTOH, AI inference and training massively increased demand for GPUs, high-bandwidth memory, and datacenter infrastructure.
 
-Generating code became cheaper.
+Which meant that RAMs required for typical cloud offerings were scarce, leading to increase in infra costs, as well.
 
-But code review? Challenging.
+## Realization
 
-Maintenance? Even more challenging.
+Once organizations saw AI-assisted outputs increasing, a natural question emerged:
 
-Bugs? Rampant.
+If smaller teams can produce significantly more measurable output, do organizations still need the same team sizes?
 
-# Reality Check
+## The Leverage Era
 
-So the Inputs for the Business started increasing. More features churned out faster. More experimental products.
+With increased AI inputs (cost & effort), leaders started seeing productivity through metrics. So the next mandate was to reduce the human agents in the loop.
 
-Did the AI tools increase productivity? Yes. Even the skeptical ones (like my past self) will agree on this.
+This included ZIRP + Covid-era overhiring, bubbled salaries, and decrease in quality and/or quantity of Outputs from them.
 
-Did the costs increase? Yes, definitely. Paying for API calls, subscriptions, etc.
+Why? A leaner team can do so much more.
 
-Did the Outputs for the business (profits) increase in the same proportion? Not likely.
+Fewer geese.
 
-Which means, business is stagnating or worse declining, while Input costs (inclusive of AI tools) are increasing.
+More expected golden eggs per goose.
 
-Did companies over-hire during the ZIRP + pandemic era? Yes.
+## Conclusion
 
-Did they have "organizational debt" of poor and lower end of medium performers? Yes.
+The real AI hallucination problem may not just be the model hallucinating.
 
-To continue investment into AI + productivity gains for most employees means that the org has to cut costs. Either have a financial ceiling for AI costs or reduce headcount. Which is what most orgs are doing now.
+It may also be organizations hallucinating sustainable productivity from increasingly measurable outputs.
 
-This would continue to happen until
-
-## We Seriously Learn\* To Use AI Correctly
-
-The tokens need to be effectively used to create business value.
-
-Not useless BS features and products, which should ideally not be prioritized in the first place.
-
-## Cost of Tokens Actually Come Down
-
-These AI companies need to become profitable so that the costs of tokens actually come down.
-
-Else this would continue eat the profits of the orgs. And orgs would stop / drastically reduce AI and then boom the AI bubble bursts (highly unlikely but possible)
-
-## Rethink "Spray And Pray" Strategy
-
-Be very clear about where to deploy AI and where to not deploy AI.
-
-Tech Leaders & Non-Tech folks who are in AI psychosis & hallucination zones that "This <version> of <model> would replace engineers, marketers, designers, UX, etc" need to touch some grass and come to reality.
-
-AI / LLMs are not in a state to replace humans in the loop (countable or entire departments). It'd force tightening of the org size.
-
-## Understand That You're Still A Cell In An Excel Sheet
-
-You and I have always been a cell in an excel sheet. That's not changing.
-
-Your team is a team of chickens of count N. You're outputting X eggs totally. Which means output per chicken is X / N.
-
-Now your team count might be M (< N). And you need to output more than X eggs totally as a team. Then the output per chicken must be >= X / M.
-
-Which means more work hours, more stress, more burn out, more of everything.
-
-AI may not entirely replace you or me. But the AI-economics would.
-
-That's the harsh reality of the macro-economics being played out.
+And until we all actually "learn AI" to create productivity equivalent (or better) business outcomes, this cycle would still continue.
