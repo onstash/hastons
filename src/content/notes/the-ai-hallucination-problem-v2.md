@@ -1,8 +1,8 @@
 ---
-title: "The Current ReAIlity"
-publishedAt: "2026-05-07"
+title: "The AI Hallucination Problem"
+publishedAt: "2026-05-27"
 description: "AI, hallucination, psychosis & its impact"
-slug: "the-current-reaility"
+slug: "the-ai-hallucination-problem-v2"
 category: "ai"
 ---
 
