@@ -17,7 +17,7 @@ const summaries = collection.sort(
         summaries.map((summary) => (
           <li>
             <a
-              href={`/bookshelf/${summary.slug}`}
+              href={`/bookshelf/${summary.id}`}
               class="group flex justify-between gap-3"
             >
               <span class="group-hover:underline">{summary.data.title}</span>
