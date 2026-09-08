@@ -1,8 +1,9 @@
 import { defineCollection } from "astro:content";
-import { z } from "astro/zod";
+import { glob } from "astro/loaders";
+import { z } from "zod";
 
 const posts = defineCollection({
-  type: "content",
+  loader: glob({ base: "./src/content/posts", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -12,7 +13,7 @@ const posts = defineCollection({
 });
 
 const notes = defineCollection({
-  type: "content",
+  loader: glob({ base: "./src/content/notes", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -23,7 +24,7 @@ const notes = defineCollection({
 });
 
 const bookshelf = defineCollection({
-  type: "content",
+  loader: glob({ base: "./src/content/bookshelf", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),

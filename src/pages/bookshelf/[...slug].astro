@@ -1,19 +1,19 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { formatDate } from "../../lib/utils";
 
 export async function getStaticPaths() {
   const summaries = await getCollection("bookshelf");
   return summaries.map((summary) => ({
-    params: { slug: summary.slug },
+    params: { slug: summary.id },
     props: summary,
   }));
 }
 type Props = CollectionEntry<"bookshelf">;
 
 const summary = Astro.props;
-const { Content } = await summary.render();
+const { Content } = await render(summary);
 ---
 
 <Layout
