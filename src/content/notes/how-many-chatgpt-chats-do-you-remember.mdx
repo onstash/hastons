@@ -1,0 +1,134 @@
+---
+title: "How many ChatGPT chats do you remember?"
+publishedAt: "2026-05-08"
+description: "I keep forgetting useful decisions hidden inside old AI chats. Here is what I am trying to do about it."
+slug: "how-many-chatgpt-chats-do-you-remember"
+category: "ai"
+---
+
+import ChatRecallTest from "../../components/ChatRecallTest.tsx";
+import ContextAccessChat from "../../components/ContextAccessChat.tsx";
+import McpConnectionExplainer from "../../components/McpConnectionExplainer.tsx";
+
+I can remember having a useful conversation with ChatGPT. I usually cannot remember which chat it was in.
+
+I use ChatGPT to think, write, plan, debug, and occasionally explain something I should probably already know. Some of those chats contain useful decisions. Then I close the tab and forget they existed. I remember the feeling of a useful chat more often than I remember the chat itself.
+
+This is especially annoying because I have ADHD, low dopamine, and poor working memory in some areas. I can remember that I solved a problem. Finding the solution again is a different boss fight.
+
+## Try a small test
+
+Look at five old ChatGPT conversations. Before opening them, how many do you recognise from the title?
+
+<ChatRecallTest client:load />
+
+I did this and realised that my chat history had become a very large cupboard full of unnamed cables. Something in there may be useful. I do not want to inspect every cable.
+
+## The answer exists. I just cannot find it
+
+ChatGPT can often answer the question in front of me. The problem is that the useful context may be trapped in another conversation, another app, or a note I wrote six months ago.
+
+So I keep repeating myself.
+
+I explain the project again. I describe the decision again. I search for the old chat. Sometimes I find it. Sometimes I start a new chat and pretend the old one never existed.
+
+That last option is surprisingly effective until I need the old decision.
+
+## I kept building places to store things
+
+I have tried the normal solutions. Notes apps. Project pages. Databases. A few systems with enough tags to qualify as a minor government department.
+
+The pattern was always the same. I built the system, enjoyed the feeling of having a system, and then stopped maintaining it.
+
+I had plenty of places to store things. I kept forgetting to use them.
+
+Then I had to remember where I put something when I needed it.
+
+## The export plan was not the answer
+
+At one point I thought I should export my old conversations and put everything into one searchable system.
+
+This sounded sensible for about ten minutes.
+
+Then I looked at the exports. Different formats. Messy data. Conversations that were useful for five minutes and irrelevant forever after. I had a large cleanup job before I had proved that the result would help.
+
+I would also have to decide what deserved to survive. Every conversation? Only the important ones? How would I know before I needed them?
+
+I stopped asking how to import everything and started asking whether the assistant could find one useful thing.
+
+> What if the assistant could reach the relevant context when I needed it?
+
+I did not need another place to dump everything. I needed a way to find the one thing I had already decided when I needed it again.
+
+I started calling that place Life OS. It holds the decisions and context I would be annoyed to lose.
+
+## The assistant still needs a way to look
+
+Imagine asking:
+
+> What did I decide about Japan?
+
+The assistant may understand the question. The answer could still be somewhere else.
+
+<ContextAccessChat client:load />
+
+The important part is not the product name. It is the boundary. The assistant cannot search personal context until I allow it to.
+
+That is the part I care about. I want useful context without handing over an invisible copy of everything I have ever written.
+
+## Where MCP fits
+
+MCP stands for Model Context Protocol. The name is less interesting than the job it does.
+
+It gives an assistant a standard way to ask an approved service for information. In this example, the assistant asks for a note. The service searches the connected context and returns a result.
+
+The path looks like this:
+
+```text
+Your question -> approved connection -> saved context -> useful answer
+```
+
+Here is the same thing with the technical names exposed:
+
+<McpConnectionExplainer client:load />
+
+You do not need to know the protocol to understand the benefit. The assistant can reach the part of your information that you allowed it to use.
+
+<details>
+<summary>Technical version</summary>
+
+In this example, the assistant asks for notes. Life OS searches them and returns one matching result. MCP carries that request. Authentication and permissions decide whether the request is allowed.
+
+</details>
+
+## Stored information is not useful memory
+
+Saving a note is only the first step. The system still needs to find the right note, decide whether it fits the question, and let me correct it when it is wrong.
+
+For example, I might write:
+
+> I decided to focus my Japan trip on food and hiking.
+
+Later, that decision should appear when I ask about planning the trip. I should also be able to keep it, edit it, or reject it.
+
+I called that retrieval layer Total Recall. It is a movie reference, a bad pun, and a name I can actually remember.
+
+The name is less important than the rule. The system should help me find a decision when I need it. It should not quietly turn every stray thought into permanent memory.
+
+## What I am trying to build
+
+The assistant asks for the note. The connection carries the request. The note comes back.
+
+I want to ask a question without reconstructing six months of my own thinking first.
+
+I am still working out how much of this should exist as a product and how much is me building infrastructure to avoid searching one old chat.
+
+Both explanations may be true.
+
+The useful result would be simple. I ask a question, the assistant finds the context I meant, and I do not have to reconstruct six months of my own thinking first.
+
+Finding the note is the problem I am solving first.
+
+The harder problem is deciding what deserves to be remembered, what has become outdated, and when the assistant should ask me before using it.
+
+That is Part 2.

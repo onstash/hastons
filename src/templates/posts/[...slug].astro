@@ -14,12 +14,16 @@ type Props = CollectionEntry<"posts">;
 
 const post = Astro.props;
 const { Content } = await render(post);
+const image =
+  post.data.image === "/static/blog-placeholder.png"
+    ? `/static/og/posts/${post.id}.png`
+    : post.data.image;
 ---
 
 <Layout
   title={post.data.title}
   description={post.data.description}
-  image={post.data.image}
+  image={image}
 >
   <main>
     <h1 class="mb-5 text-xl font-medium">
