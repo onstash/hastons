@@ -1,0 +1,295 @@
+<section
+  class="context-demo"
+  aria-labelledby="context-demo-title"
+  data-context-demo
+>
+  <div class="context-demo__intro">
+    <p class="context-demo__eyebrow">See the difference</p>
+    <h2 id="context-demo-title">Can your assistant find the conversation?</h2>
+    <p>Imagine asking about an idea you discussed last week.</p>
+  </div>
+
+  <div class="context-demo__history">
+    <p class="context-demo__label">Your chat history</p>
+    <div class="context-demo__memory-card">
+      <span class="context-demo__memory-dot" aria-hidden="true"></span>
+      <div>
+        <strong>Planning a Japan trip</strong><small
+          >Last Tuesday · food, hiking, October</small
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="context-demo__app">
+    <div
+      class="context-demo__tabs"
+      role="tablist"
+      aria-label="Choose how the assistant can access your context"
+    >
+      <button type="button" role="tab" aria-selected="true" data-mode="without"
+        >Without access</button
+      >
+      <button type="button" role="tab" aria-selected="false" data-mode="with"
+        >With access</button
+      >
+    </div>
+    <div class="context-demo__conversation">
+      <div class="context-demo__message context-demo__message--user">
+        Continue the conversation about the trip.
+      </div>
+      <div class="context-demo__connection" data-connection hidden>
+        <span aria-hidden="true"></span> Finding relevant context…
+      </div>
+      <div
+        class="context-demo__message context-demo__message--assistant"
+        data-answer
+      >
+        Which trip are you talking about?
+      </div>
+    </div>
+    <p class="context-demo__status" aria-live="polite" data-status>
+      Try both versions. The difference is the connection to your history.
+    </p>
+  </div>
+
+  <details class="context-demo__details">
+    <summary>For technical readers: how the connection works</summary>
+    <p>
+      MCP is the connector between an AI client and an external application. It
+      lets the client discover and invoke structured tools that can search or
+      act on Life OS.
+    </p>
+    <p>
+      The protocol’s session behavior is separate from application memory. The
+      application can still return explicit handles, such as a <code
+        >browser_id</code
+      >, for later requests.
+    </p>
+  </details>
+</section>
+
+<style>
+  .context-demo {
+    --ink: #1d1d1f;
+    --muted: #6e6e73;
+    --line: #d2d2d7;
+    --surface: #f5f5f7;
+    --blue: #0071e3;
+    margin: 3rem 0;
+    color: var(--ink);
+  }
+  .context-demo__eyebrow {
+    margin: 0 0 0.5rem;
+    color: var(--blue);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .context-demo h2 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    letter-spacing: -0.03em;
+  }
+  .context-demo__intro > p:last-child {
+    margin: 0;
+    color: var(--muted);
+  }
+  .context-demo__history {
+    margin: 1.5rem 0 0.5rem;
+  }
+  .context-demo__label {
+    margin: 0 0 0.5rem;
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .context-demo__memory-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 0.65rem;
+    padding: 0.85rem;
+    background: var(--surface);
+  }
+  .context-demo__memory-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+  .context-demo__memory-card strong,
+  .context-demo__memory-card small {
+    display: block;
+  }
+  .context-demo__memory-card small {
+    margin-top: 0.2rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+  .context-demo__app {
+    overflow: hidden;
+    margin-top: 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: white;
+    box-shadow: 0 18px 45px rgb(0 0 0 / 0.08);
+  }
+  .context-demo__tabs {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid var(--line);
+    padding: 0.5rem;
+    background: var(--surface);
+  }
+  .context-demo__tabs button {
+    min-height: 40px;
+    border: 0;
+    border-radius: 0.45rem;
+    padding: 0.55rem 0.8rem;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.8rem;
+  }
+  .context-demo__tabs button[aria-selected="true"] {
+    background: white;
+    color: var(--ink);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  }
+  .context-demo__conversation {
+    display: grid;
+    gap: 1rem;
+    padding: 2rem;
+  }
+  .context-demo__message {
+    max-width: 80%;
+    border-radius: 0.75rem;
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+  .context-demo__message--user {
+    justify-self: end;
+    background: var(--ink);
+    color: white;
+  }
+  .context-demo__message--assistant {
+    justify-self: start;
+    background: var(--surface);
+    color: var(--ink);
+    transition:
+      background-color 220ms ease-out,
+      color 220ms ease-out;
+  }
+  .context-demo__message--assistant[data-connected="true"] {
+    background: rgb(0 113 227 / 0.1);
+  }
+  .context-demo__connection {
+    justify-self: center;
+    color: var(--blue);
+    font-size: 0.75rem;
+    animation: context-in 280ms ease-out both;
+  }
+  .context-demo__connection span {
+    display: inline-block;
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-right: 0.35rem;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+  .context-demo__status {
+    margin: 0;
+    border-top: 1px solid var(--line);
+    padding: 1rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .context-demo__details {
+    margin-top: 1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .context-demo__details summary {
+    color: var(--ink);
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .context-demo button:focus-visible {
+    outline: 3px solid rgb(0 113 227 / 0.35);
+    outline-offset: 2px;
+  }
+  @keyframes context-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.4rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .context-demo__connection {
+      animation: none;
+    }
+  }
+  :global(.dark) .context-demo {
+    --ink: #f5f5f7;
+    --muted: #a1a1a6;
+    --line: #3a3a3c;
+    --surface: #2c2c2e;
+  }
+  :global(.dark) .context-demo__app {
+    background: #1c1c1e;
+  }
+  :global(.dark) .context-demo__tabs button[aria-selected="true"] {
+    background: #3a3a3c;
+    color: var(--ink);
+  }
+  :global(.dark) .context-demo__message--user {
+    background: #f5f5f7;
+    color: #1d1d1f;
+  }
+</style>
+
+<script>
+  const demos = document.querySelectorAll<HTMLElement>("[data-context-demo]");
+  demos.forEach((demo) => {
+    const tabs = [...demo.querySelectorAll<HTMLButtonElement>("[data-mode]")];
+    const connection = demo.querySelector<HTMLElement>("[data-connection]");
+    const answer = demo.querySelector<HTMLElement>("[data-answer]");
+    const status = demo.querySelector<HTMLElement>("[data-status]");
+    const render = (mode: string) => {
+      tabs.forEach((tab) =>
+        tab.setAttribute("aria-selected", String(tab.dataset.mode === mode)),
+      );
+      const connected = mode === "with";
+      if (connection) connection.hidden = !connected;
+      if (answer) {
+        answer.textContent = connected
+          ? "I found it. You were planning a Japan trip for October, focused on food and hiking."
+          : "Which trip are you talking about?";
+        answer.dataset.connected = String(connected);
+      }
+      if (status)
+        status.textContent = connected
+          ? "With access: the assistant can reach the relevant context."
+          : "Without access: the conversation still exists, but the assistant cannot reach it.";
+    };
+    tabs.forEach((tab) =>
+      tab.addEventListener("click", () =>
+        render(tab.dataset.mode ?? "without"),
+      ),
+    );
+    render("without");
+  });
+</script>

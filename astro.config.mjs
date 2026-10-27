@@ -8,10 +8,12 @@ import { visualizer } from "rollup-plugin-visualizer";
 
 import { SITE_URL } from "./src/consts";
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), react()],
   markdown: {
     shikiConfig: {
       themes: {

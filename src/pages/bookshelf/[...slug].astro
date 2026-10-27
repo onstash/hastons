@@ -14,12 +14,16 @@ type Props = CollectionEntry<"bookshelf">;
 
 const summary = Astro.props;
 const { Content } = await render(summary);
+const image =
+  summary.data.image === "/static/blog-placeholder.png"
+    ? `/static/og/bookshelf/${summary.id}.png`
+    : summary.data.image;
 ---
 
 <Layout
   title={summary.data.title}
   description={summary.data.description ?? ""}
-  image={summary.data.image}
+  image={image}
 >
   <main>
     <h1 class="mb-5 text-xl font-medium">
