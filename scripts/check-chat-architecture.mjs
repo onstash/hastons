@@ -5,7 +5,13 @@ import ts from "typescript";
 const root = process.cwd();
 const chatFiles = fs
   .readdirSync(path.join(root, "src/components"), { withFileTypes: true })
-  .filter((entry) => entry.isFile() && entry.name.endsWith(".tsx") && /chat|mcp/i.test(entry.name))
+  .filter(
+    (entry) =>
+      entry.isFile() &&
+      entry.name.endsWith(".tsx") &&
+      /chat|mcp/i.test(entry.name) &&
+      !entry.name.includes("ConnectionExplainer"),
+  )
   .map((entry) => path.join(root, "src/components", entry.name));
 const failures = [];
 

@@ -17,7 +17,7 @@ export default function ChatRecallTest() {
     );
 
   return (
-    <section className="my-12 text-foreground" aria-labelledby="recall-test-title">
+    <section className="post-interaction my-12 text-foreground" aria-labelledby="recall-test-title">
       <h2 id="recall-test-title">How much of your chat history do you remember?</h2>
       <p>Select the conversations you would recognise if they appeared again.</p>
       <div className="mx-auto mt-6 max-w-xl overflow-hidden rounded-2xl border bg-card text-card-foreground shadow-xl shadow-black/5">

@@ -1,103 +1,57 @@
-import { Button } from "@/components/ui/button";
+import { createChat } from "@shadcn/helpers/tanstack-ai";
 import { useChat } from "@tanstack/ai-react";
-import { useRef, useState } from "react";
-import type { FormEvent } from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
-const initialMessages = [
-  {
-    id: "weather-user",
-    role: "user",
-    parts: [{ type: "text", content: "Will I need an umbrella in London tomorrow?" }],
-  },
-  {
-    id: "weather-assistant",
-    role: "assistant",
-    parts: [
-      { type: "text", content: "I understand the question, but I cannot check live weather yet." },
-    ],
-  },
-];
-
-const stages = [
+const answers = [
   "Better instructions",
   "A stronger model",
-  "A weather connection",
+  "Access to a live weather service",
   "More conversation history",
 ] as const;
-type Stage = (typeof stages)[number];
-const wrongFeedback: Record<Exclude<Stage, "A weather connection">, string> = {
-  "Better instructions":
+const scriptedChat = createChat()
+  .user("Will I need an umbrella in London tomorrow?")
+  .assistant("I understand the question, but I cannot check live weather yet.")
+  .user("Better instructions")
+  .assistant(
     "Clearer instructions help me understand the request, but they do not give me live weather data.",
-  "A stronger model":
+  )
+  .user("A stronger model")
+  .assistant(
     "A stronger model may reason better, but it still needs a source for tomorrow’s forecast.",
-  "More conversation history":
+  )
+  .user("Access to a live weather service")
+  .assistant(({ writer }) =>
+    writer
+      .text("Exactly. I need access to a live weather service outside this conversation.")
+      .sleep(400)
+      .text(
+        "That connection lets an assistant call a tool, receive the result, and answer with current information.",
+      ),
+  )
+  .user("More conversation history")
+  .assistant(
     "More history gives me context about you. It does not tell me what the weather will be.",
-};
-
-type ChatMessage = { id: string; role: string; parts?: Array<{ content?: string; text?: string }> };
+  );
 
 export default function McpWeatherPuzzle() {
-  const chat = useChat({
+  const { messages, append, status } = useChat({
     threadId: "mcp-weather-puzzle",
-    initialMessages,
-    fetcher: async () => ({}) as never,
-  } as never);
-  const messages = chat.messages as unknown as ChatMessage[];
-  const messagesRef = useRef(messages);
-  const [input, setInput] = useState("");
-  const [choice, setChoice] = useState<Stage | null>(null);
+    initialMessages: scriptedChat.get(2),
+    connection: scriptedChat.transport({ delayMs: 30 }),
+  });
+  const [choice, setChoice] = useState<string | null>(null);
   const [correct, setCorrect] = useState(false);
-
-  const add = (role: string, content: string) => {
-    const next = [
-      ...messagesRef.current,
-      { id: `${role}-${Date.now()}-${Math.random()}`, role, parts: [{ type: "text", content }] },
-    ];
-    messagesRef.current = next;
-    chat.setMessages(next as never);
+  const busy = status === "submitted" || status === "streaming";
+  const choose = (answer: string) => {
+    if (busy || correct) return;
+    setChoice(answer);
+    if (answer === "Access to a live weather service") setCorrect(true);
+    const next = scriptedChat.next(messages as never);
+    if (next) void append(next as never);
   };
-
-  const choose = (stage: Stage) => {
-    setChoice(stage);
-    add("user", stage);
-    if (stage === "A weather connection") {
-      setCorrect(true);
-      setTimeout(
-        () =>
-          add("assistant", "Exactly. I need access to a weather source outside this conversation."),
-        250,
-      );
-      setTimeout(
-        () =>
-          add(
-            "assistant",
-            "That connection is what lets an assistant call a tool, receive the result, and answer with current information.",
-          ),
-        900,
-      );
-      return;
-    }
-    setTimeout(() => add("assistant", wrongFeedback[stage]), 250);
-  };
-
-  const submit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const message = input.trim();
-    if (!message) return;
-    add("user", message);
-    setInput("");
-    setTimeout(
-      () =>
-        add(
-          "assistant",
-          "I can understand that request, but I still need access to a weather source to answer it.",
-        ),
-      250,
-    );
-  };
-
   return (
-    <section className="my-8 text-foreground" aria-labelledby="mcp-puzzle-title">
+    <section className="post-interaction my-8 text-foreground" aria-labelledby="mcp-puzzle-title">
       <h3 id="mcp-puzzle-title">What would let the assistant answer?</h3>
       <p>The assistant understands the question. Choose what it needs next.</p>
       <div
@@ -106,17 +60,17 @@ export default function McpWeatherPuzzle() {
       >
         <header className="flex items-center gap-3 border-b px-4 py-3">
           <span
-            className="grid size-8 place-items-center rounded-full bg-foreground text-background"
+            className="grid size-8 place-items-center rounded-full bg-foreground text-background text-xs font-semibold"
             aria-hidden="true"
           >
-            ✦
+            AI
           </span>
           <div>
             <strong className="block text-sm">Assistant</strong>
             <small className="block text-xs text-muted-foreground">Interactive simulation</small>
           </div>
         </header>
-        <div className="grid gap-4 p-5" aria-live="polite">
+        <div className="grid gap-4 p-5" aria-live="polite" aria-busy={busy}>
           {messages.map((message) => (
             <div
               data-chat-message="true"
@@ -125,10 +79,18 @@ export default function McpWeatherPuzzle() {
               key={message.id}
             >
               <p className="m-0">
-                {message.parts?.map((part) => part.content ?? part.text).join("")}
+                {message.parts
+                  .filter((part) => part.type === "text")
+                  .map((part) => part.content)
+                  .join("")}
               </p>
             </div>
           ))}
+          {busy && (
+            <p className="m-0 text-sm text-muted-foreground" role="status">
+              Assistant is thinking…
+            </p>
+          )}
         </div>
         <div
           className="grid gap-2 border-t px-4 py-4"
@@ -136,62 +98,36 @@ export default function McpWeatherPuzzle() {
           aria-label="What would let the assistant answer?"
         >
           <p className="m-0 text-xs font-medium text-muted-foreground">Choose an answer</p>
-          {stages.map((stage) => (
+          {answers.map((answer) => (
             <Button
               type="button"
               variant={
-                choice === stage
-                  ? stage === "A weather connection" && correct
-                    ? "default"
-                    : "secondary"
-                  : "outline"
+                choice === answer && correct
+                  ? "default"
+                  : choice === answer
+                    ? "secondary"
+                    : "outline"
               }
               className="h-auto justify-start whitespace-normal px-4 py-3 text-left"
-              aria-pressed={choice === stage}
-              onClick={() => choose(stage)}
-              key={stage}
+              aria-pressed={choice === answer}
+              onClick={() => choose(answer)}
+              disabled={busy || correct}
+              key={answer}
             >
-              {stage}
-              {stage === "A weather connection" && correct ? " ✓" : ""}
+              {answer}
+              {choice === answer && correct ? " ✓" : ""}
             </Button>
           ))}
-          {choice && (
-            <p className="m-0 text-xs text-muted-foreground" role="status">
-              {correct
+          <p className="m-0 text-xs text-muted-foreground" role="status">
+            {busy
+              ? "The assistant is responding…"
+              : correct
                 ? "You found the missing capability."
-                : "Not quite. Try another possibility."}
-            </p>
-          )}
+                : choice
+                  ? "Not quite. Try another possibility."
+                  : "Choose one possibility."}
+          </p>
         </div>
-        <form className="flex gap-2 border-t p-3" onSubmit={submit}>
-          <label className="sr-only" htmlFor="weather-puzzle-input">
-            Message the assistant
-          </label>
-          <input
-            className="h-10 min-w-0 flex-1 rounded-full border bg-muted px-4 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
-            id="weather-puzzle-input"
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            placeholder="Ask the assistant…"
-          />
-          <Button
-            type="submit"
-            size="icon"
-            className="h-10 w-10 shrink-0"
-            aria-label="Send message"
-          >
-            ↑
-          </Button>
-        </form>
-        {correct && (
-          <div className="mx-4 mb-4 rounded-xl border bg-muted p-4 text-sm">
-            <strong>The missing piece is access.</strong>
-            <p className="mb-0 mt-1">
-              The assistant needs a way to reach information outside the chat. Later, we will give
-              this connection a name.
-            </p>
-          </div>
-        )}
       </div>
     </section>
   );

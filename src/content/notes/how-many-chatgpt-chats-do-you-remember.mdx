@@ -1,212 +1,134 @@
 ---
-title: "How Many of Your ChatGPT Chats Do You Actually Remember?"
-publishedAt: "2026-10-27"
-description: "Every time you close an AI chat, you leave useful ideas and decisions behind. I wanted them to carry forward instead of disappearing into history, so I built Life OS and connected it to AI agents."
+title: "How many ChatGPT chats do you remember?"
+publishedAt: "2026-05-08"
+description: "I keep forgetting useful decisions hidden inside old AI chats. Here is what I am trying to do about it."
 slug: "how-many-chatgpt-chats-do-you-remember"
 category: "ai"
 ---
 
 import ChatRecallTest from "../../components/ChatRecallTest.tsx";
 import ContextAccessChat from "../../components/ContextAccessChat.tsx";
-import McpWeatherPuzzle from "../../components/McpWeatherPuzzle.tsx";
+import McpConnectionExplainer from "../../components/McpConnectionExplainer.tsx";
 
-# How Many of Your ChatGPT Chats Do You Actually Remember?
+I can remember having a useful conversation with ChatGPT. I usually cannot remember which chat it was in.
 
-> **Interactive draft:** this post is designed to explain the story to curious non-techies first, then let technical readers open the machinery underneath.
+I use ChatGPT to think, write, plan, debug, and occasionally explain something I should probably already know. Some of those chats contain useful decisions. Then I close the tab and forget they existed. I remember the feeling of a useful chat more often than I remember the chat itself.
 
-Open your ChatGPT or Claude history and start scrolling.
+This is especially annoying because I have ADHD, low dopamine, and poor working memory in some areas. I can remember that I solved a problem. Finding the solution again is a different boss fight.
 
-How many conversations do you remember? Which ideas did you abandon? Which decisions did you make? Which useful answer disappeared into a thread you will never find again?
+## Try a small test
 
-AI makes it easy to start conversations. It makes it harder to carry the useful parts of those conversations into the rest of your life.
-
-I have ADHD, so this problem is familiar to me. I start systems, abandon them, return to old ideas, and discover that the context I needed is somewhere I cannot find it.
-
-I have built productivity tools before. This time, I wanted one place for the decisions, projects, and conversations I would need to find again.
-
-I call it **Life OS**.
-
-I also wanted to see whether an AI agent could use that information.
-
-## Start with the problem
+Look at five old ChatGPT conversations. Before opening them, how many do you recognise from the title?
 
 <ChatRecallTest client:load />
 
-This is not a test of how many chats people forget. It makes one familiar problem visible: useful context gets buried quickly.
+I did this and realised that my chat history had become a very large cupboard full of unnamed cables. Something in there may be useful. I do not want to inspect every cable.
 
-## I kept looking for a system that would stick
+## The answer exists. I just cannot find it
 
-Before Life OS, I tried Notion and other productivity tools. At first, each one looked like the answer. I could make pages, databases, task lists, dashboards, and a place for everything.
+ChatGPT can often answer the question in front of me. The problem is that the useful context may be trapped in another conversation, another app, or a note I wrote six months ago.
 
-But the flexibility became part of the problem. I kept designing the system instead of returning to it. Other tools solved a different slice of the problem, but my context was still scattered across notes, tasks, documents, and AI conversations.
+So I keep repeating myself.
 
-I have a long and distinguished history of abandoning productivity systems.
+I explain the project again. I describe the decision again. I search for the old chat. Sometimes I find it. Sometimes I start a new chat and pretend the old one never existed.
 
-The systems were not useless. They were just separate from the way I actually think: jumping between ideas, returning to old projects, and needing context at the moment I come back to something.
+That last option is surprisingly effective until I need the old decision.
 
-## My first plan was a lot of work
+## I kept building places to store things
 
-My first idea was to export my conversations from ChatGPT and Claude, process them with scripts, and load the useful parts into Life OS.
+I have tried the normal solutions. Notes apps. Project pages. Databases. A few systems with enough tags to qualify as a minor government department.
 
-I underestimated the work involved. The exports were different, the data needed cleaning, and I would have to decide what was worth keeping.
+The pattern was always the same. I built the system, enjoyed the feeling of having a system, and then stopped maintaining it.
 
-Between getting overwhelmed and procrastinating about it, I forgot about the whole thing.
+I had plenty of places to store things. I kept forgetting to use them.
 
-The failed export plan changed the question. Did I need to move every old conversation into Life OS, or could I make Life OS available when I needed it?
+Then I had to remember where I put something when I needed it.
 
-That question reminded me of something I had previously dismissed because I didn't understand it's value yet: MCP.
+## The export plan was not the answer
 
-## What is "MCP"?
+At one point I thought I should export my old conversations and put everything into one searchable system.
 
-**MCP** stands for **Model Context Protocol**.
+This sounded sensible for about ten minutes.
 
-- **Model**: the AI model generating the response.
-- **Context**: the information, resources, and tools the model may need.
-- **Protocol**: the shared rules that let the model's host communicate with those tools and resources.
+Then I looked at the exports. Different formats. Messy data. Conversations that were useful for five minutes and irrelevant forever after. I had a large cleanup job before I had proved that the result would help.
 
-MCP does not give the model memory by itself. It provides a standard way for an AI application to discover and use outside capabilities—such as weather, files, notes, or databases—when the application allows it.
+I would also have to decide what deserved to survive. Every conversation? Only the important ones? How would I know before I needed them?
 
-<McpWeatherPuzzle client:load />
+I stopped asking how to import everything and started asking whether the assistant could find one useful thing.
 
-## The thing I had dismissed
+> What if the assistant could reach the relevant context when I needed it?
 
-Months earlier, I had printed a technical blog post about MCP. I tried to understand MCP v1, found it too complicated, and put it aside. Then the protocol evolved. I watched YouTube videos from few tech creators on the same topic. That gave me a simpler way to think about the problem. Instead of importing my entire history, I could connect the assistant to the place where I kept useful context.
+I did not need another place to dump everything. I needed a way to find the one thing I had already decided when I needed it again.
 
-### What if the assistant could reach the right conversation?
+I started calling that place Life OS. It holds the decisions and context I would be annoyed to lose.
 
-The useful question is not “does the AI remember everything?” It is: can the assistant reach the small piece of context that matters right now?
+## The assistant still needs a way to look
+
+Imagine asking:
+
+> What did I decide about Japan?
+
+The assistant may understand the question. The answer could still be somewhere else.
 
 <ContextAccessChat client:load />
 
-MCP now seemed practical. I did not need to import every conversation into one giant archive. I needed a controlled connection between the assistant and the place where I kept useful context.
+The important part is not the product name. It is the boundary. The assistant cannot search personal context until I allow it to.
+
+That is the part I care about. I want useful context without handing over an invisible copy of everything I have ever written.
+
+## Where MCP fits
+
+MCP stands for Model Context Protocol. The name is less interesting than the job it does.
+
+It gives an assistant a standard way to ask an approved service for information. In this example, the assistant asks for a note. The service searches the connected context and returns a result.
+
+The path looks like this:
+
+```text
+Your question -> approved connection -> saved context -> useful answer
+```
+
+Here is the same thing with the technical names exposed:
+
+<McpConnectionExplainer client:load />
+
+You do not need to know the protocol to understand the benefit. The assistant can reach the part of your information that you allowed it to use.
 
 <details>
-<summary>For technical readers: protocol sessions versus application memory</summary>
+<summary>Technical version</summary>
 
-The protocol’s session behavior is separate from application memory. Before the 2026 update, MCP began with an initialization handshake and maintained a protocol-level session. The 2026 specification removes that handshake and session from the protocol core, so requests can be handled independently.
-
-An application can still keep state. A tool can return an explicit handle, such as a `basket_id` or `browser_id`, and the model can pass that handle into a later tool call. The state still exists. The application exposes it instead of hiding it inside MCP’s transport session.
+In this example, the assistant asks for notes. Life OS searches them and returns one matching result. MCP carries that request. Authentication and permissions decide whether the request is allowed.
 
 </details>
 
-I still did not understand every detail. I understood enough to see a possible path: instead of exporting every conversation and building a large processing pipeline, I could let an AI agent talk to Life OS directly.
+## Stored information is not useful memory
 
-## I asked an agent to teach me
+Saving a note is only the first step. The system still needs to find the right note, decide whether it fits the question, and let me correct it when it is wrong.
 
-I went to my Pi coding agent, using my Codex subscription, and asked it to guide me through building an MCP SDK from first principles.
+For example, I might write:
 
-I specifically asked it to use Socratic teaching. I did not want it to hand me an SDK and declare victory. I wanted it to ask questions, make me reason through the design, and explain the gaps when I got stuck.
+> I decided to focus my Japan trip on food and hiking.
 
-**[Interactive: Socratic coding replay]**
+Later, that decision should appear when I ask about planning the trip. I should also be able to keep it, edit it, or reject it.
 
-<details>
-<summary>For technical readers: show the coding conversation</summary>
+I called that retrieval layer Total Recall. It is a movie reference, a bad pun, and a name I can actually remember.
 
-```text
-Me: How do I build an MCP server?
+The name is less important than the rule. The system should help me find a decision when I need it. It should not quietly turn every stray thought into permanent memory.
 
-Agent: What does the server need to do first?
+## What I am trying to build
 
-Me: Receive a request.
+The assistant asks for the note. The connection carries the request. The note comes back.
 
-Agent: What must the request contain?
+I want to ask a question without reconstructing six months of my own thinking first.
 
-Me: Enough information to understand the operation and respond.
-```
+I am still working out how much of this should exist as a product and how much is me building infrastructure to avoid searching one old chat.
 
-</details>
+Both explanations may be true.
 
-The agent was useful as a guide, but the responsibility stayed with me. I had to decide what I understood, what I did not understand, and when to verify an assumption.
+The useful result would be simple. I ask a question, the assistant finds the context I meant, and I do not have to reconstruct six months of my own thinking first.
 
-## The connection
+Finding the note is the problem I am solving first.
 
-The system has four parts:
+The harder problem is deciding what deserves to be remembered, what has become outdated, and when the assistant should ask me before using it.
 
-```text
-AI assistant → MCP → Total Recall → Life OS
-```
-
-MCP is the connector. Life OS is the application. Total Recall is the service that gives agents a controlled way to interact with information about me.
-
-For a non-technical reader, think of MCP as an adapter that lets an AI assistant use an external tool.
-
-<details>
-<summary>For technical readers: show the implementation</summary>
-
-An MCP server exposes structured tools that an AI client can discover and invoke. The server authenticates the request, validates its input, applies the appropriate authorization boundary, and calls the underlying Life OS service.
-
-</details>
-
-## Then authentication entered the story
-
-A real request needed an identity, permission, and a route back to the client.
-
-**[Interactive: OAuth approval walkthrough]**
-
-```text
-Request access → log in → approve → receive permission → call the tool
-```
-
-The flow looked simple on paper. The browser experience exposed the complications. A desktop session, an in-app browser, an approval screen, and a fresh authentication request do not always behave as a developer expects.
-
-That was one of the lessons of this project: a protocol can work correctly while the user experience still feels confusing.
-
-<details>
-<summary>For technical readers: show the authorization boundaries</summary>
-
-The important boundaries were the authorization request, the login session, the approval decision, the callback, and the token used for the MCP request. A browser session being present does not automatically mean a sensitive authorization flow will skip re-authentication.
-
-</details>
-
-## A database is not useful memory
-
-At this point, Life OS could store memories. An agent could reach the service. That was progress, but it was not the finish line.
-
-A database full of memories is like a filing cabinet. It can hold a lot of information and still be useless if nobody knows which drawer to open.
-
-Useful memory needs a loop:
-
-```text
-capture → retrieve → judge relevance → apply → correct
-```
-
-**[Interactive: Filing cabinet to personal librarian]**
-
-Start with “Memory stored.” On each click, reveal:
-
-1. Memory found
-2. Memory judged relevant
-3. Memory applied to the current task
-4. Memory corrected by the user
-
-That is the next phase of Life OS. The question is no longer only whether information can be stored. It is whether the right context appears at the right moment and remains under the user’s control.
-
-## Memory should not mean surveillance
-
-I do not want an AI to remember everything about me.
-
-I want it to suggest useful context, explain why it surfaced that context, and let me correct or reject it. The person should remain in control of what becomes durable memory.
-
-Imagine opening a new conversation and asking, “What was I working on last week?” You get the relevant context without searching through dozens of chats. That is useful memory. It gives you the right context when you need it, instead of keeping a complete record.
-
-## What I learned
-
-I started with a familiar productivity problem: useful context disappearing into old AI conversations and unfinished systems.
-
-I tried the obvious solution, got overwhelmed, and forgot about it. Then a protocol I had previously dismissed became understandable enough to investigate. An AI agent helped me learn the protocol by asking questions instead of hiding the complexity behind generated code.
-
-The resulting system is still an experiment. The hard part is no longer proving that an agent can call an application. The hard part is making that interaction useful, trustworthy, and understandable.
-
-That is what I am trying to build with Life OS.
-
-And I am still figuring out what an AI should remember about me, when it should use that memory, and how much control I should keep.
-
-Try a small version of this yourself: open your AI chat history and save one conversation you know you will want again. Not all of it. Just one.
-
-## Implementation notes
-
-- Replace the interactive placeholders with accessible components, not animation-only explanations.
-- Use motion for sequence and cause-and-effect: forgotten cards, stateful/stateless request flow, and the Socratic question chain.
-- Respect `prefers-reduced-motion` and provide static fallbacks.
-- Use one or two memes as pacing devices. Do not make the article meme-heavy.
-- Use licensed embeds or original recreations for copyrighted meme formats.
+That is Part 2.
