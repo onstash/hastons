@@ -7,7 +7,7 @@ category: "ai"
 ---
 
 import ChatRecallTest from "../../components/ChatRecallTest.tsx";
-import ContextAccessChat from "../../components/ContextAccessChat.tsx";
+import AccessSwitchDemo from "../../components/AccessSwitchDemo.tsx";
 import McpConnectionExplainer from "../../components/McpConnectionExplainer.tsx";
 
 I can remember having a useful conversation with ChatGPT. I usually cannot remember which chat it was in.
@@ -18,7 +18,7 @@ This is especially annoying because I have ADHD, low dopamine, and poor working 
 
 ## Try a small test
 
-Look at five old ChatGPT conversations. Before opening them, how many do you recognise from the title?
+Think about your last hundred ChatGPT conversations. Do not open the sidebar. Just make an honest guess.
 
 <ChatRecallTest client:load />
 
@@ -70,7 +70,7 @@ Imagine asking:
 
 The assistant may understand the question. The answer could still be somewhere else.
 
-<ContextAccessChat client:load />
+<AccessSwitchDemo client:load />
 
 The important part is not the product name. It is the boundary. The assistant cannot search personal context until I allow it to.
 

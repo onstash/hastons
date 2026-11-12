@@ -1,79 +1,74 @@
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-const chats = [
-  "The idea I had on Monday",
-  "How to plan next quarter",
-  "That debugging conversation",
-  "A book I wanted to remember",
-];
+/*
+ * Recall test — decided from /proto/recall-test
+ * - Direction: "Estimate". One slider and a 100-dot grid; the reader states a number, no test.
+ * - Starts at 20 with a "drag to your honest guess" hint; the verdict line appears on first drag.
+ * - Rejected: Ticks (checklist of made-up titles; the reader ticks chats they never had).
+ * - Rejected: Flash (six-second memory test; tests short-term memory, not months-old memory).
+ * - Rejected: Hunt (find one decision in forty titles; tallest, slowest, replays poorly).
+ */
+
+const TOTAL = 100;
+
+const verdict = (value: number) => {
+  if (value === 0) return "None. At least the filing system is consistent.";
+  if (value <= 10) return "A handful. That matches what most people tell me.";
+  if (value <= 35) return "Some. The rest are still in there, unlabelled.";
+  if (value <= 70) return "Most of them is a confident answer. Try finding one from March.";
+  return "Nearly all. Either your titles are better than mine, or you have not looked lately.";
+};
 
 export default function ChatRecallTest() {
-  const [selected, setSelected] = useState<string[]>([]);
-  const [revealed, setRevealed] = useState(false);
-  const toggle = (chat: string) =>
-    setSelected((current) =>
-      current.includes(chat) ? current.filter((item) => item !== chat) : [...current, chat],
-    );
+  const [value, setValue] = useState(20);
+  const [touched, setTouched] = useState(false);
 
   return (
-    <section className="post-interaction my-12 text-foreground" aria-labelledby="recall-test-title">
-      <h2 id="recall-test-title">How much of your chat history do you remember?</h2>
-      <p>Select the conversations you would recognise if they appeared again.</p>
-      <div className="mx-auto mt-6 max-w-xl overflow-hidden rounded-2xl border bg-card text-card-foreground shadow-xl shadow-black/5">
-        <header className="flex items-center gap-3 border-b px-4 py-3">
-          <span
-            className="grid size-8 place-items-center rounded-full bg-foreground text-background"
-            aria-hidden="true"
-          >
-            ✦
-          </span>
-          <div>
-            <strong className="block text-sm">Chat history</strong>
-            <small className="block text-xs text-muted-foreground">Recent conversations</small>
-          </div>
-        </header>
-        <div className="grid gap-1 p-3" role="group" aria-label="Illustrative chat history">
-          {chats.map((chat) => {
-            const isSelected = selected.includes(chat);
-            return (
-              <Button
-                key={chat}
-                variant="ghost"
-                className={`h-11 w-full justify-between px-3 text-left ${isSelected ? "bg-muted" : ""}`}
-                aria-pressed={isSelected}
-                onClick={() => toggle(chat)}
-              >
-                <span>{chat}</span>
-                <span aria-hidden="true">›</span>
-              </Button>
-            );
-          })}
+    <section className="post-interaction my-10 text-foreground" aria-label="Recall estimate">
+      <div className="mx-auto max-w-xl rounded-2xl border bg-card p-5 text-card-foreground shadow-xl shadow-black/5 sm:p-6">
+        <label htmlFor="recall-estimate" className="block text-sm font-medium">
+          Of your last 100 chats, how many could you find again right now?
+        </label>
+
+        <div className="mt-5 flex items-end justify-between gap-4">
+          <p className="m-0 leading-none">
+            <span className="text-5xl font-semibold tracking-tight tabular-nums">{value}</span>
+            <span className="ml-2 text-sm text-muted-foreground">findable</span>
+          </p>
+          <p className="m-0 text-sm tabular-nums text-muted-foreground">{TOTAL - value} lost</p>
         </div>
-        <div className="flex flex-wrap gap-2 border-t p-3">
-          <Button onClick={() => setRevealed(true)} disabled={!selected.length}>
-            Reveal result
-          </Button>
-          <Button
-            variant="ghost"
-            onClick={() => {
-              setSelected([]);
-              setRevealed(false);
-            }}
-          >
-            Reset
-          </Button>
+
+        <div
+          className="pointer-events-none mt-5 grid grid-cols-[repeat(20,minmax(0,1fr))] gap-1.5 select-none"
+          aria-hidden="true"
+        >
+          {Array.from({ length: TOTAL }, (_, index) => (
+            <span
+              key={index}
+              className={`aspect-square rounded-[3px] ${index < value ? "bg-foreground" : "bg-muted"}`}
+            />
+          ))}
         </div>
-        {revealed && (
-          <div className="mx-3 mb-3 rounded-xl border bg-muted p-4 text-sm" role="status">
-            <strong>
-              You recognised {selected.length} of {chats.length} conversations.
-            </strong>
-            <p className="mb-0 mt-1">
-              Useful context can exist without being available when you need it.
-            </p>
-          </div>
-        )}
+
+        <input
+          id="recall-estimate"
+          type="range"
+          min={0}
+          max={TOTAL}
+          value={value}
+          onChange={(event) => {
+            setValue(Number(event.target.value));
+            setTouched(true);
+          }}
+          className="mt-4 h-11 w-full cursor-pointer rounded-md touch-pan-y accent-foreground"
+          aria-valuetext={`${value} of ${TOTAL} findable`}
+        />
+
+        <p className="m-0 min-h-12 text-sm leading-relaxed text-muted-foreground" role="status">
+          {touched
+            ? `${verdict(value)} Useful context can exist without being available when you need it.`
+            : "Drag to your honest guess."}
+        </p>
       </div>
     </section>
   );

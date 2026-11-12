@@ -46,28 +46,36 @@ try {
   await page.goto(url, { waitUntil: "networkidle" });
   if (!(await chat.isVisible())) throw new Error("Chat demo is not visible");
   await page.screenshot({ path: path.join(outputDir, "light-before.png"), fullPage: true });
-  const lightBefore = await assertMessages("light before", 2);
+  const lightBefore = await assertMessages("light before", 1);
 
-  await chat.getByRole("button", { name: "Then look through my notes" }).click();
-  await page.waitForTimeout(1200);
-  if (!(await chat.getByText("I found a note from last week", { exact: false }).isVisible()))
-    throw new Error("Note result is not visible");
-  if ((await messages.count()) !== 5)
-    throw new Error(`light after: expected 5 messages, got ${await messages.count()}`);
-  if ((await chat.getByRole("button", { name: "Then look through my notes" }).count()) !== 0)
-    throw new Error("Suggestion remained after activation");
-  if (!(await chat.locator("#context-demo-input").isEnabled()))
-    throw new Error("Composer is not enabled");
-  const lightAfter = await assertMessages("light after", 5);
+  // Access off: the request is stopped at the connection.
+  const toggle = chat.getByRole("switch", { name: "Allow access to my notes" });
+  await chat.getByRole("button", { name: "Ask the question" }).click();
+  await chat.getByText("I can’t see your notes", { exact: false }).waitFor({ timeout: 10000 });
+  await assertMessages("light blocked", 2);
+
+  // Access on: the note comes back.
+  await toggle.click();
+  if ((await toggle.getAttribute("aria-checked")) !== "true")
+    throw new Error("Access switch did not turn on");
+  await assertMessages("after switching on", 1);
+  await chat.getByRole("button", { name: "Ask the question" }).click();
+  await chat.getByText("food and hiking", { exact: false }).waitFor({ timeout: 10000 });
+  await page.waitForTimeout(400);
+  const lightAfter = await assertMessages("light after", 2);
   await page.screenshot({ path: path.join(outputDir, "light-after.png"), fullPage: true });
 
   await page.evaluate(() => document.documentElement.classList.add("dark"));
   await page.screenshot({ path: path.join(outputDir, "dark-after.png"), fullPage: true });
-  const darkAfter = await assertMessages("dark after", 5);
+  const darkAfter = await assertMessages("dark after", 2);
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: path.join(outputDir, "mobile-after.png"), fullPage: true });
-  const mobileAfter = await assertMessages("mobile after", 5);
+  const mobileAfter = await assertMessages("mobile after", 2);
+
+  // Turning access back off clears the answer.
+  await toggle.click();
+  await assertMessages("after switching off", 1);
 
   console.log(
     JSON.stringify(
