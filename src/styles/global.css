@@ -58,7 +58,8 @@
       @apply my-4 font-medium dark:text-white;
     }
     :not(pre) > code {
-      @apply rounded border bg-zinc-200/50 px-1 py-0.5 font-mono text-sm font-medium whitespace-nowrap text-black dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-white;
+      /* The important modifier beats the code rule in UI SDK's stylesheet, which the block editor loads globally. */
+      @apply rounded border !bg-zinc-200/50 px-1 py-0.5 font-mono text-sm font-medium whitespace-nowrap !text-black dark:border-zinc-700 dark:!bg-zinc-800/50 dark:!text-white;
     }
     pre:has(code) {
       @apply my-4 max-h-[600px] overflow-auto rounded-lg border p-4 font-mono text-sm font-medium dark:border-zinc-700;
@@ -212,7 +213,28 @@
 }
 
 /* Shared language for the post's interactive explainers. */
-.post-interaction :is(button, input) { transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, opacity 150ms ease; }
-.post-interaction button:focus-visible, .post-interaction input:focus-visible, .post-interaction summary:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
-.post-interaction [role="status"] { min-height: 1.25rem; }
-@media (prefers-reduced-motion: reduce) { .post-interaction *, .post-interaction *::before, .post-interaction *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
+.post-interaction :is(button, input) {
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease,
+    opacity 150ms ease;
+}
+.post-interaction button:focus-visible,
+.post-interaction input:focus-visible,
+.post-interaction summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.post-interaction [role="status"] {
+  min-height: 1.25rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .post-interaction *,
+  .post-interaction *::before,
+  .post-interaction *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
