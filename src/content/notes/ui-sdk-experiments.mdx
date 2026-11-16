@@ -1,0 +1,53 @@
+---
+title: "UI SDK experiments"
+description: "Interface experiments built with UI SDK. The first one is a block editor with a slash menu, Markdown shortcuts, and drag to reorder."
+publishedAt: "Nov 16 2026"
+---
+
+import BlockEditorDemo from "../../components/BlockEditorDemo.tsx";
+
+I wanted to know how much of a block editor a UI toolkit could handle for me. The answer surprised me. The drag, the keyboard moves, and the screen reader messages come from the toolkit. Most of the work left is the editing itself.
+
+Try it. Type `/` to open the block menu. Type `# `, `## `, `[] `, `> `, or three backticks at the start of a line to change its type.
+
+<BlockEditorDemo client:load />
+
+## What I built
+
+- Each block holds one text field. Enter splits a block. Backspace joins two blocks.
+- A drag handle moves a block. Focus the handle, press Space, then use the arrow keys.
+- Nothing is saved. A reload resets the page.
+
+## What it does not do
+
+- A selection cannot span two blocks.
+- Block text has no bold, italic, or links.
+- Pointer drags and the slash menu need a real browser to test. The unit tests only cover the logic.
+
+The source is in the [ui-sdk-experiments repository](https://github.com/onstash/ui-sdk-experiments). This page shows a copy of it, so the two can drift apart.
+
+## Where an AI agent fits
+
+A block editor is a useful surface for AI work, because a page of blocks is simple to read and simple to change. Two parts already work.
+
+- **Markdown out.** "Copy as Markdown" turns the page into plain Markdown. That is a format a model can read, so the same page can be pasted into a prompt or saved as a file.
+- **Agents can move blocks.** The list declares a `move` action for UI SDK's agent bridge. An agent can find a block by its name and move it, without a person clicking through the page.
+
+These parts are not built yet. They follow from the two above.
+
+- **Proposed edits.** An agent suggests a change, and the change shows up as pending. The person accepts or rejects it before it lands.
+- **Streamed text.** A model writes into a block as it generates, and the person can edit the block while the text is still arriving.
+- **Blocks as context.** The page, as Markdown, becomes the context for the next model call, so the model sees what the person has already written.
+
+The common idea is that the person stays in control of the page. The model suggests and the person decides.
+
+## How it was built
+
+We built it in the ui-sdk-experiments repository. It is a Vite and React app with a few experiments on one page. The editor is the first of them. This page holds a copy of its code.
+
+The work went in this order:
+
+1. **The data first.** A block is a type and some text. The page is a list of blocks. The Markdown shortcuts, such as `# ` and `[] `, are a small table that maps text to a block type. This part does not need the UI to run.
+2. **Then the list.** The list uses UI SDK's reorder behaviour. That gives drag, keyboard moves, and the screen reader messages. We wrote a small custom list primitive on top of it, and kept the custom code short.
+3. **Then the slash menu and the controls.** The `/` menu, the to-do checkbox, and the toast messages use UI SDK components.
+4. **Then the checks.** jsdom can't open the slash menu or test a pointer drag. We checked those in a real browser, with a headless browser script that clicks, types, and reads the page.

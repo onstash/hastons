@@ -1,0 +1,232 @@
+/* Scoped to .block-lab so the blog's own styles are not changed. */
+@layer ui-sdk;
+@import "@ui-sdk/core/web.css";
+
+.block-lab {
+  color-scheme: light;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --edge: light-dark(rgb(20 20 30 / 0.1), rgb(255 255 255 / 0.12));
+  --ui-background: light-dark(oklch(0.985 0.006 80), oklch(0.2 0.012 255));
+  --ui-foreground: light-dark(oklch(0.23 0.012 255), oklch(0.95 0.008 80));
+  --ui-muted: light-dark(oklch(0.955 0.009 80), oklch(0.27 0.013 255));
+  --ui-muted-foreground: light-dark(oklch(0.46 0.012 255), oklch(0.74 0.01 255));
+  --ui-border: var(--edge);
+  --ui-input: light-dark(oklch(0.62 0.01 255), oklch(0.6 0.01 255));
+  --ui-primary: light-dark(oklch(0.52 0.17 38), oklch(0.72 0.15 38));
+  --ui-primary-foreground: light-dark(oklch(0.99 0.004 80), oklch(0.2 0.012 255));
+  --ui-destructive: light-dark(oklch(0.5 0.19 27), oklch(0.7 0.16 27));
+  --ui-ring: light-dark(oklch(0.6 0.16 38), oklch(0.72 0.15 38));
+  --ui-ring-border: var(--ui-ring);
+  --ui-radius: 8px;
+  --ui-spacing: 4px;
+  --ui-font-size: 0.875rem;
+  font-family: var(--ui-font-sans, system-ui, -apple-system, "Segoe UI", sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--ui-background);
+  color: var(--ui-foreground);
+}
+
+/* Block editor */
+
+.editor {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.block {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 0.125rem 0;
+  border-radius: var(--ui-radius);
+  background: var(--ui-background);
+}
+
+.block[data-dragging] {
+  position: relative;
+  z-index: 1;
+  transform: translate(var(--drag-x, 0), var(--drag-y, 0));
+  box-shadow: 0 8px 24px -8px rgb(0 0 0 / 0.25);
+}
+
+.block[data-moving] {
+  outline: 2px solid var(--ui-ring);
+  outline-offset: 2px;
+}
+
+.block-handle {
+  flex: none;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.75rem;
+  margin-top: 0.1875rem;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--ui-muted-foreground);
+  cursor: grab;
+  opacity: 0;
+  touch-action: none;
+}
+
+.block-handle::before {
+  content: "";
+  position: absolute;
+  inset: -6px -4px;
+}
+
+.block:hover .block-handle,
+.block-handle:focus-visible,
+.block[data-moving] .block-handle {
+  opacity: 1;
+}
+
+.block-handle:focus-visible {
+  outline: 2px solid var(--ui-ring);
+}
+
+.block-handle svg {
+  width: 0.625rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.block-body {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.block-body [data-slot="checkbox"] {
+  flex: none;
+  margin-top: 0.4375rem;
+}
+
+.block-text {
+  flex: 1;
+  min-width: 0;
+  field-sizing: content;
+  min-height: 0;
+  height: auto;
+  resize: none;
+  padding: 0.25rem 0.375rem;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.block-text::placeholder {
+  color: transparent;
+}
+
+.block-text:focus {
+  background: var(--ui-muted);
+  border-radius: 6px;
+}
+
+.block-text:focus::placeholder {
+  color: var(--ui-muted-foreground);
+}
+
+.block[data-type="h1"] .block-text {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.block[data-type="h2"] .block-text {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+.block[data-type="h1"] .block-handle,
+.block[data-type="h1"] .block-body [data-slot="checkbox"] {
+  margin-top: 0.5rem;
+}
+
+.block[data-type="quote"] .block-body {
+  padding-inline-start: 0.875rem;
+  border-inline-start: 3px solid var(--ui-foreground);
+}
+
+.block[data-type="code"] .block-text {
+  font-family: var(--ui-font-mono);
+  font-size: 0.875rem;
+  padding: 0.75rem;
+  background: var(--ui-muted);
+  border-radius: var(--ui-radius);
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.block-text[data-checked] {
+  color: var(--ui-muted-foreground);
+  text-decoration: line-through;
+  text-decoration-thickness: from-font;
+}
+
+.block-divider {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2rem;
+}
+
+.block-divider hr {
+  flex: 1;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--edge);
+}
+
+.block-divider [data-slot="button"] {
+  border: 0;
+  opacity: 0;
+}
+
+.block:hover .block-divider [data-slot="button"],
+.block-divider [data-slot="button"]:focus-visible {
+  opacity: 1;
+}
+
+.block-divider svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.slash-menu {
+  min-width: 15rem;
+}
+
+.slash-menu [data-slot="trigger-menu-item"] {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
